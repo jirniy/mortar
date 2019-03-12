@@ -46,7 +46,7 @@ module Mortar
       load_config
 
       resources = process_overlays
-      resources = inject_extra_labels(resources, extra_labels) unless extra_labels.empty?
+      resources = inject_extra_labels(resources, process_extra_labels)
 
       if output?
         puts resources_output(resources)
@@ -102,6 +102,11 @@ module Mortar
       end
 
       @extra_labels
+    end
+
+    # @return [Hash]
+    def process_extra_labels
+      @config.labels(extra_labels)
     end
 
     # @param resources [Array<K8s::Resource>]
