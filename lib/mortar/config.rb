@@ -9,6 +9,7 @@ module Mortar
 
       raise ConfigError, "Failed to load config, check config file syntax" unless cfg.is_a? Hash
       raise ConfigError, "Failed to load config, overlays needs to be an array" if cfg.key?('overlays') && !cfg['overlays'].is_a?(Array)
+
       if cfg.key?('labels')
         raise ConfigError, "Failed to load config, labels needs to be a hash" if !cfg['labels'].is_a?(Hash)
         raise ConfigError, "Failed to load config, label values need to be strings" if cfg['labels'].values.any? { |value| !value.is_a?(String) }
